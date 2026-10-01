@@ -1,0 +1,88 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "dashboard": {
+      "root": "apps/dashboard",
+      "framework": "vite",
+      "buildCommand": "VITE_BASE_PATH=/dashboard/ pnpm build",
+      "outputDirectory": "dist"
+    },
+    "seller-dashboard": {
+      "root": "apps/seller-dashboard",
+      "framework": "vite",
+      "buildCommand": "VITE_BASE_PATH=/sellers/ pnpm build",
+      "outputDirectory": "dist"
+    },
+    "storefront": {
+      "root": "apps/storefront",
+      "framework": "nextjs",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "server",
+          "format": "url",
+          "env": "SPREE_SERVER_URL"
+        }
+      ]
+    },
+    "server": {
+      "root": "server",
+      "runtime": "container",
+      "entrypoint": "Dockerfile"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/dashboard",
+      "destination": {
+        "service": "dashboard",
+        "path": "/"
+      }
+    },
+    {
+      "source": "/dashboard/(.*)",
+      "destination": {
+        "service": "dashboard",
+        "path": "/$1"
+      }
+    },
+    {
+      "source": "/sellers",
+      "destination": {
+        "service": "seller-dashboard",
+        "path": "/"
+      }
+    },
+    {
+      "source": "/sellers/(.*)",
+      "destination": {
+        "service": "seller-dashboard",
+        "path": "/$1"
+      }
+    },
+    {
+      "source": "/api/webhooks/spree",
+      "destination": {
+        "service": "storefront"
+      }
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "server"
+      }
+    },
+    {
+      "source": "/rails/(.*)",
+      "destination": {
+        "service": "server"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "storefront"
+      }
+    }
+  ]
+}

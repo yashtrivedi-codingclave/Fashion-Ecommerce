@@ -9,7 +9,8 @@ let _wholesaleClient: Client | null = null;
 /**
  * Initialize the Spree Next.js integration.
  * Call this once in your app (e.g., in `lib/storefront.ts`).
- * If not called, the client will auto-initialize from SPREE_API_URL and SPREE_PUBLISHABLE_KEY env vars.
+ * If not called, the client will auto-initialize from the Vercel service
+ * binding or the SPREE_API_URL and SPREE_PUBLISHABLE_KEY env vars.
  */
 export function initSpreeNext(config: SpreeNextConfig): void {
   _config = config;
@@ -24,13 +25,13 @@ export function initSpreeNext(config: SpreeNextConfig): void {
  */
 export function getClient(): Client {
   if (!_client) {
-    const baseUrl = process.env.SPREE_API_URL;
+    const baseUrl = process.env.SPREE_SERVER_URL || process.env.SPREE_API_URL;
     const publishableKey = process.env.SPREE_PUBLISHABLE_KEY;
     if (baseUrl && publishableKey) {
       initSpreeNext({ baseUrl, publishableKey });
     } else {
       throw new Error(
-        "Spree client is not configured. Either call initSpreeNext() or set SPREE_API_URL and SPREE_PUBLISHABLE_KEY environment variables.",
+        "Spree client is not configured. Either call initSpreeNext() or set SPREE_SERVER_URL/SPREE_API_URL and SPREE_PUBLISHABLE_KEY environment variables.",
       );
     }
   }
