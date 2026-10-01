@@ -53,7 +53,7 @@ export default function CartPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8  py-8">
+      <div className="container mx-auto px-4 py-10 sm:px-6 lg:px-8">
         <div className="animate-pulse">
           <div className="h-8 bg-gray-200 rounded w-32 mb-8"></div>
           <div className="space-y-4">
@@ -68,7 +68,7 @@ export default function CartPage() {
 
   if (!cart?.items || cart.items.length === 0) {
     return (
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8  py-16">
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center">
           <ShoppingBag
             className="w-24 h-24 text-gray-300 mx-auto"
@@ -91,19 +91,19 @@ export default function CartPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8  py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">
+    <div className="container mx-auto px-4 py-10 sm:px-6 lg:px-8">
+      <h1 className="mb-8 font-serif text-3xl font-normal text-foreground sm:text-4xl">
         {t("shoppingCart")}
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl border border-gray-200 divide-y">
+          <div className="divide-y divide-border border-y border-border">
             {cart.items.map((item) => (
-              <div key={item.id} className="p-6 flex gap-6">
+              <div key={item.id} className="flex gap-4 py-5 sm:gap-6 sm:py-7">
                 {/* Image */}
-                <div className="relative w-24 h-24 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
+                <div className="relative h-24 w-20 shrink-0 overflow-hidden bg-secondary sm:h-32 sm:w-28">
                   <ProductImage
                     src={item.thumbnail_url}
                     alt={item.name}
@@ -115,15 +115,15 @@ export default function CartPage() {
 
                 {/* Details */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-medium text-gray-900 truncate">
+                  <h3 className="truncate font-serif text-base text-foreground sm:text-lg">
                     {item.name}
                   </h3>
                   {item.options_text && (
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-xs text-muted-foreground">
                       {item.options_text}
                     </p>
                   )}
-                  <p className="mt-2 text-lg font-semibold text-gray-900">
+                  <p className="mt-2 text-sm text-foreground">
                     {item.display_price}
                   </p>
                 </div>
@@ -138,11 +138,12 @@ export default function CartPage() {
                     disabled={updating}
                   />
                   <Button
-                    variant="destructive"
+                    variant="ghost"
                     size="sm"
                     aria-label={t("removeItemLabel", { name: item.name })}
                     onClick={() => handleRemove(item)}
                     disabled={updating}
+                    className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
                   >
                     {tc("remove")}
                   </Button>
@@ -154,15 +155,15 @@ export default function CartPage() {
 
         {/* Order Summary */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-xl border border-gray-200 p-6 sticky top-24">
-            <h2 className="text-lg font-medium text-gray-900">
+          <div className="border-y border-border bg-[#f3efe7] p-5 sm:p-6 lg:sticky lg:top-24">
+            <h2 className="font-serif text-xl font-normal text-foreground">
               {tc("orderSummary")}
             </h2>
 
             <dl className="mt-6 space-y-4">
               <div className="flex justify-between">
-                <dt className="text-gray-500">{tc("subtotal")}</dt>
-                <dd className="text-gray-900">{cart.display_item_total}</dd>
+                <dt className="text-muted-foreground">{tc("subtotal")}</dt>
+                <dd className="text-foreground">{cart.display_item_total}</dd>
               </div>
               {cart.discount_total && parseFloat(cart.discount_total) < 0 && (
                 <div className="flex justify-between text-green-600">
@@ -172,23 +173,23 @@ export default function CartPage() {
               )}
               {cart.delivery_total && parseFloat(cart.delivery_total) > 0 && (
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">{tc("shipping")}</dt>
-                  <dd className="text-gray-900">
+                  <dt className="text-muted-foreground">{tc("shipping")}</dt>
+                  <dd className="text-foreground">
                     {cart.display_delivery_total}
                   </dd>
                 </div>
               )}
               {cart.tax_total && parseFloat(cart.tax_total) > 0 && (
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">{tc("tax")}</dt>
-                  <dd className="text-gray-900">{cart.display_tax_total}</dd>
+                  <dt className="text-muted-foreground">{tc("tax")}</dt>
+                  <dd className="text-foreground">{cart.display_tax_total}</dd>
                 </div>
               )}
-              <div className="border-t pt-4 flex justify-between">
-                <dt className="text-lg font-medium text-gray-900">
+              <div className="flex justify-between border-t border-border pt-4">
+                <dt className="text-base font-medium text-foreground">
                   {tc("total")}
                 </dt>
-                <dd className="text-lg font-bold text-gray-900">
+                <dd className="text-base font-medium text-foreground">
                   {cart.display_total}
                 </dd>
               </div>
@@ -210,10 +211,10 @@ export default function CartPage() {
                 cart.amount_due !== cart.total &&
                 parseFloat(cart.amount_due) > 0 && (
                   <div className="border-t pt-4 flex justify-between">
-                    <dt className="text-lg font-medium text-gray-900">
+                    <dt className="text-base font-medium text-foreground">
                       {t("amountDue")}
                     </dt>
-                    <dd className="text-lg font-bold text-gray-900">
+                    <dd className="text-base font-medium text-foreground">
                       {cart.display_amount_due}
                     </dd>
                   </div>
@@ -231,7 +232,11 @@ export default function CartPage() {
               )}
               {!expressProcessing && (
                 <>
-                  <Button size="lg" asChild className="w-full">
+                  <Button
+                    size="lg"
+                    asChild
+                    className="h-12 w-full rounded-none bg-[#211c18] text-[10px] uppercase tracking-[0.16em] text-white hover:bg-[#3b332d]"
+                  >
                     <Link href={`${basePath}/checkout/${cart.id}`}>
                       {t("proceedToCheckout")}
                     </Link>

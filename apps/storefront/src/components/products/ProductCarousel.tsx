@@ -77,7 +77,7 @@ export function ProductCarousel({
       <SwiperComponent
         modules={[Navigation]}
         spaceBetween={24}
-        slidesPerView={1}
+        slidesPerView={2}
         navigation={{
           prevEl: prevRef.current,
           nextEl: nextRef.current,
@@ -88,9 +88,9 @@ export function ProductCarousel({
         onReachEnd={updateNavState}
         onAfterInit={updateNavState}
         breakpoints={{
-          640: { slidesPerView: 2, spaceBetween: 24 },
-          768: { slidesPerView: 3, spaceBetween: 24 },
-          1024: { slidesPerView: 4, spaceBetween: 24 },
+          640: { slidesPerView: 2, spaceBetween: 20 },
+          768: { slidesPerView: 3, spaceBetween: 20 },
+          1024: { slidesPerView: 4, spaceBetween: 20 },
         }}
         className="product-carousel"
       >
@@ -100,8 +100,8 @@ export function ProductCarousel({
               product={product}
               basePath={basePath}
               index={index}
-              listId="featured-products"
-              listName="Featured Products"
+              listId="homepage-the-edit"
+              listName="The Edit"
               currency={currency}
               fetchPriority={index === 0 ? "high" : undefined}
             />

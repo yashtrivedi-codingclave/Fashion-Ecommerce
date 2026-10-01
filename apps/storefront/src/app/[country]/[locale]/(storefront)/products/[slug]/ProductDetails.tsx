@@ -121,8 +121,8 @@ export function ProductDetails({ product, basePath }: ProductDetailsProps) {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8  py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(360px,0.85fr)] lg:gap-14">
         {/* Media Gallery */}
         <div>
           <MediaGallery
@@ -133,13 +133,15 @@ export function ProductDetails({ product, basePath }: ProductDetailsProps) {
         </div>
 
         {/* Product Info */}
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <h1 className="font-serif text-3xl font-normal leading-tight text-foreground sm:text-4xl">
+            {product.name}
+          </h1>
 
           {/* Price */}
           <div className="mt-4 flex items-center gap-4">
             {displayPrice ? (
-              <span className="text-3xl font-bold text-gray-900">
+              <span className="font-serif text-3xl font-normal text-foreground sm:text-4xl">
                 {displayPrice}
               </span>
             ) : (
@@ -147,10 +149,10 @@ export function ProductDetails({ product, basePath }: ProductDetailsProps) {
             )}
             {onSale && strikethroughPrice && (
               <>
-                <span className="text-xl text-gray-500 line-through">
+                <span className="text-base text-muted-foreground line-through">
                   {strikethroughPrice}
                 </span>
-                <span className="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                <span className="bg-secondary px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest text-foreground">
                   {t("sale")}
                 </span>
               </>
@@ -160,12 +162,12 @@ export function ProductDetails({ product, basePath }: ProductDetailsProps) {
           {/* Stock Status */}
           <div className="mt-4">
             {inStock ? (
-              <span className="inline-flex items-center gap-1.5 text-green-600">
+              <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
                 <CircleCheckBig className="w-5 h-5" />
                 {t("inStock")}
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 text-red-600">
+              <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
                 <CircleX className="w-5 h-5" />
                 {t("outOfStock")}
               </span>
@@ -174,7 +176,7 @@ export function ProductDetails({ product, basePath }: ProductDetailsProps) {
 
           {/* Variant Picker */}
           {hasVariants && optionTypes.length > 0 && (
-            <div className="mt-8">
+            <div className="mt-7 border-y border-border py-6">
               <VariantPicker
                 variants={variants}
                 optionTypes={optionTypes}
@@ -195,7 +197,7 @@ export function ProductDetails({ product, basePath }: ProductDetailsProps) {
                 </Link>
               </Button>
             ) : (
-              <div className="flex gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row">
                 <QuantityPickerField
                   quantity={quantity}
                   onQuantityChange={setQuantity}
@@ -207,6 +209,7 @@ export function ProductDetails({ product, basePath }: ProductDetailsProps) {
                   size="lg"
                   onClick={handleAddToCart}
                   disabled={loading || !isPurchasable}
+                  className="h-12 flex-1 rounded-none bg-[#211c18] text-[10px] uppercase tracking-[0.16em] text-white hover:bg-[#3b332d]"
                 >
                   {loading ? (
                     <>
@@ -228,13 +231,13 @@ export function ProductDetails({ product, basePath }: ProductDetailsProps) {
 
           {/* Description */}
           {product.description_html && (
-            <div className="mt-10 border-t pt-8">
-              <h2 className="text-lg font-medium text-gray-900 mb-4">
+            <div className="mt-8 border-t border-border pt-6">
+              <h2 className="mb-4 text-xs font-medium uppercase tracking-[0.16em] text-foreground">
                 {t("description")}
               </h2>
               {/* Description is admin-authored HTML from the Spree CMS backend (trusted source) */}
               <div
-                className="text-gray-600 prose prose-sm max-w-none"
+                className="prose prose-sm max-w-none text-muted-foreground"
                 dangerouslySetInnerHTML={{
                   __html: product.description_html,
                 }}
@@ -246,8 +249,8 @@ export function ProductDetails({ product, basePath }: ProductDetailsProps) {
           <ProductCustomFields customFields={product.custom_fields} />
 
           {/* Product Details */}
-          <div className="mt-8 border-t pt-8">
-            <h2 className="text-lg font-medium text-gray-900 mb-4">
+          <div className="mt-8 border-t border-border pt-6">
+            <h2 className="mb-4 text-xs font-medium uppercase tracking-[0.16em] text-foreground">
               {t("details")}
             </h2>
             <dl className="space-y-3">

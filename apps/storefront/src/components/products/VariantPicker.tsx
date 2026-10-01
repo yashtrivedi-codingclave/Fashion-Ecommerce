@@ -136,11 +136,11 @@ export function VariantPicker({
         return (
           <div key={optionType.id}>
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-[10px] font-medium uppercase tracking-[0.16em] text-foreground">
                 {optionType.label}
               </span>
               {selectedValue && (
-                <span className="text-sm text-gray-500">
+                <span className="text-xs text-muted-foreground">
                   {getOptionValueDetails(optionType.id, selectedValue)?.label ||
                     selectedValue}
                 </span>
@@ -169,8 +169,8 @@ export function VariantPicker({
                       disabled={!isAvailable}
                       title={optionValue?.label || value}
                       className={`
-                        w-10 h-10 rounded-lg border transition-all relative overflow-hidden
-                        ${isSelected ? "border-gray-900 ring-2 ring-primary ring-offset-2" : "border-gray-200"}
+                        relative h-9 w-9 overflow-hidden border transition-all
+                        ${isSelected ? "border-foreground ring-1 ring-foreground ring-offset-2" : "border-border"}
                         ${!isAvailable ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}
                         ${!isPurchasable && isAvailable ? "opacity-50" : ""}
                       `}
@@ -215,11 +215,7 @@ export function VariantPicker({
                       variant="outline"
                       onClick={() => handleOptionSelect(optionType.id, value)}
                       disabled={!isAvailable}
-                      className={
-                        isSelected
-                          ? "ring-2 ring-primary ring-offset-2 border-primary"
-                          : ""
-                      }
+                      className={`h-10 min-w-12 rounded-none border-border px-3 text-xs ${isSelected ? "border-foreground bg-foreground text-background hover:bg-foreground hover:text-background" : "bg-transparent"}`}
                     >
                       {optionValue?.label || value}
                       {!isPurchasable && isAvailable && (

@@ -8,6 +8,7 @@ import { CartButton } from "@/components/layout/CartButton";
 import { SearchToggle } from "@/components/layout/SearchToggle";
 import { Button } from "@/components/ui/button";
 import { isWholesaleEnabled } from "@/lib/spree";
+import { getStoreName } from "@/lib/store";
 
 const LazyMobileMenu = dynamic(
   () =>
@@ -62,19 +63,47 @@ export async function Header({
 }: HeaderProps) {
   const t = await getTranslations({ locale, namespace: "header" });
   const wholesaleEnabled = isWholesaleEnabled();
+  const storeName = getStoreName();
 
   return (
     <header className="sticky top-0 z-50 flex flex-col">
       <div className="bg-primary text-primary-foreground text-[10px] sm:text-xs text-center py-2 uppercase tracking-widest font-sans font-medium">
-        Free Shipping on All Orders Over $150
+        Made for your every day
       </div>
       <SearchToggle
         basePath={basePath}
-        left={mobileNavigation}
+        left={
+          <>
+            <div className="lg:hidden">{mobileNavigation}</div>
+            <nav
+              aria-label="Main navigation"
+              className="hidden items-center gap-5 lg:flex"
+            >
+              <Link
+                href={`${basePath}/products`}
+                className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Shop
+              </Link>
+              <Link
+                href={`${basePath}/#the-edit`}
+                className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
+              >
+                The edit
+              </Link>
+              <Link
+                href={`${basePath}/#seen-on-you`}
+                className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Our story
+              </Link>
+            </nav>
+          </>
+        }
         center={
           <Link href={basePath || "/"} className="flex items-center min-w-0">
-            <span className="font-serif text-2xl tracking-widest text-primary font-bold">
-              PAVE
+            <span className="font-serif text-xl tracking-[0.14em] text-primary sm:text-2xl">
+              {storeName}
             </span>
           </Link>
         }

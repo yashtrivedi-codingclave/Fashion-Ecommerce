@@ -34,10 +34,10 @@ export async function FeaturedProductsSection({
   });
 
   return (
-    <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 featured-products">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-bold text-gray-900">
-          {t("featuredProducts")}
+    <section className="container mx-auto px-5 py-10 sm:px-8 md:py-14 lg:px-12 featured-products">
+      <div className="mb-6 flex items-end justify-between border-b border-border pb-4">
+        <h2 className="font-serif text-3xl font-normal uppercase text-foreground sm:text-4xl">
+          The Edit
         </h2>
         <Button variant="link" asChild>
           <Link href={`${basePath}/products`}>{t("viewAll")} &rarr;</Link>

@@ -41,6 +41,14 @@ export async function FeaturedProducts({
     userToken,
   );
 
+  if (productsResponse.data.length === 0) {
+    return (
+      <p className="py-3 text-center text-xs text-muted-foreground">
+        Products will appear here once added from the admin.
+      </p>
+    );
+  }
+
   return (
     <LazyProductCarousel
       products={productsResponse.data ?? []}

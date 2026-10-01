@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { EditorialHomeSections } from "@/components/home/EditorialHomeSections";
 import { FeaturedProductsSection } from "@/components/home/FeaturedProductsSection";
 import { HeroSection } from "@/components/home/HeroSection";
-import { WholesaleSection } from "@/components/home/WholesaleSection";
 import { resolveCurrency } from "@/lib/data/markets";
 import { generateHomeMetadata } from "@/lib/metadata/home";
 
@@ -27,14 +27,20 @@ async function HomePageContent({ params }: HomePageProps) {
 
   return (
     <div>
-      <HeroSection basePath={basePath} locale={locale} />
-      <FeaturedProductsSection
+      <HeroSection basePath={basePath} />
+      <EditorialHomeSections
         basePath={basePath}
-        locale={locale}
-        country={country}
-        currency={currency}
+        productSection={
+          <div id="the-edit">
+            <FeaturedProductsSection
+              basePath={basePath}
+              locale={locale}
+              country={country}
+              currency={currency}
+            />
+          </div>
+        }
       />
-      <WholesaleSection basePath={basePath} locale={locale} />
     </div>
   );
 }

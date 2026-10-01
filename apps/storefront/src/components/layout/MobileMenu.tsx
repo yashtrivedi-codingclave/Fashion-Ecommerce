@@ -153,7 +153,7 @@ export function MobileMenu({
       >
         <SheetTitle className="sr-only">{t("menu")}</SheetTitle>
         {/* Menu header — changes based on active panel */}
-        <div className="hidden md:flex items-center justify-between px-4 h-16 border-b border-border relative overflow-hidden bg-background">
+        <div className="flex h-16 items-center justify-between border-b border-border bg-background px-4 relative overflow-hidden">
           {/* "Menu" title — visible when on main panel */}
           <span
             className={`text-xs uppercase tracking-widest font-medium transition-all duration-300 ease-in-out absolute left-4 text-foreground ${
@@ -185,6 +185,7 @@ export function MobileMenu({
             variant="ghost"
             size="icon-sm"
             onClick={() => setOpen(false)}
+            aria-label={t("closeMenu")}
             className="cursor-pointer ml-auto text-foreground"
           >
             <X className="size-4" />

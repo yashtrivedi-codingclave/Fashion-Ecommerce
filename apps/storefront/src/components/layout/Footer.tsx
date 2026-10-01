@@ -59,18 +59,10 @@ export async function Footer({ basePath, locale, categoryLinks }: FooterProps) {
     <>
       <li>
         <Link
-          href={`${basePath}/about`}
+          href={`${basePath}/#seen-on-you`}
           className="text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors block"
         >
           Our Story
-        </Link>
-      </li>
-      <li>
-        <Link
-          href={`${basePath}/journal`}
-          className="text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors block"
-        >
-          Journal
         </Link>
       </li>
     </>
@@ -143,27 +135,6 @@ export async function Footer({ basePath, locale, categoryLinks }: FooterProps) {
   return (
     <footer className="bg-secondary text-secondary-foreground border-t border-border mt-auto font-sans">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        {/* Top Section: Newsletter & Brand */}
-        <div className="flex flex-col md:flex-row md:justify-between items-start mb-16 gap-8">
-          <div className="max-w-md w-full">
-            <h2 className="font-serif text-3xl mb-4">COME TO THE PAVE SIDE.</h2>
-            <form className="flex w-full mt-4" action="#">
-              <input
-                type="email"
-                placeholder="EMAIL ADDRESS"
-                className="w-full bg-transparent border-b border-secondary-foreground py-2 text-xs uppercase tracking-widest outline-none placeholder:text-muted-foreground focus:border-primary transition-colors"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-primary text-primary-foreground px-6 py-2 text-xs uppercase tracking-widest font-medium hover:bg-primary/90 transition-colors shrink-0"
-              >
-                Sign Up
-              </button>
-            </form>
-          </div>
-        </div>
-
         {/* Links Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-0 md:gap-8 mb-16 border-t border-border md:border-none">
           {/* SHOP */}
